@@ -2,15 +2,15 @@ class Solution {
 public:
     int rob(vector<int>& nums) {
         int n=nums.size();
-        vector<int>dp(n+1,-1);
-        return solmem(nums,0,dp);
-    }
-    int solmem(vector<int>& nums,int i,vector<int>& dp){
-        if(i>=nums.size()) return 0;
-        if(dp[i]!=-1)return dp[i];
-        int include=nums[i]+solmem(nums,i+2,dp);
-        int exclude=0+solmem(nums,i+1,dp);
+        vector<int>dp(n+2,-1);
+        dp[n]=0;
+        dp[n+1]=0;
+        for(int i=n-1;i>=0;i--){
+        int include=nums[i]+dp[i+2];
+        int exclude=0+dp[i+1];
         dp[i]=max(include,exclude);
-        return dp[i];
+        }
+      
+        return dp[0];
     }
 };
