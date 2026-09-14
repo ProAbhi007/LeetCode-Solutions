@@ -1,9 +1,13 @@
 class Solution {
 public:
     int fib(int n) {
-        if(n==0) return 0;
-        if(n==1) return 1;
-        int ans=fib(n-1)+fib(n-2);
-        return ans;
+        vector<int>dp(n+1,-1);
+        return sol(n,dp);
+    }
+    int sol(int n,vector<int>&dp){
+        if(n<=1)return n;
+        if(dp[n]!=-1)return dp[n];
+        dp[n]=sol(n-1,dp)+sol(n-2,dp);
+        return dp[n];
     }
 };
