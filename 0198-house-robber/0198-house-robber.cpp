@@ -3,14 +3,14 @@ public:
     int rob(vector<int>& nums) {
         int n=nums.size();
         vector<int>dp(n+2,-1);
-        dp[n]=0;
-        dp[n+1]=0;
-        for(int i=n-1;i>=0;i--){
-        int include=nums[i]+dp[i+2];
-        int exclude=0+dp[i+1];
-        dp[i]=max(include,exclude);
+        int prev1=0;
+        int prev2=0;
+        for(int i=0;i<n;i++){
+        int curr=max(prev2,nums[i]+prev1);
+        prev1=prev2;
+        prev2=curr;
         }
       
-        return dp[0];
+        return prev2;
     }
 };
