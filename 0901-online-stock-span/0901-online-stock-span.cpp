@@ -1,22 +1,20 @@
-
 class StockSpanner {
+    int price[10001], span[10001], top;
 public:
-    stack<pair<int, int>> st;
+    StockSpanner() : top(0) {}
 
-    StockSpanner() {
-        
-    }
-
-    int next(int price) {
-        int span = 1;
-
-        while (!st.empty() && st.top().first <= price) {
-            span += st.top().second;
-            st.pop();
-        }
-
-        st.push({price, span});
-
-        return span;
+    int next(int p) {
+        int s = 1;
+        while (top > 0 && price[top - 1] <= p) s += span[--top];
+        price[top] = p;
+        span[top] = s;
+        top++;
+        return s;
     }
 };
+
+static const int fastIO = []() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    return 0;
+}();
